@@ -7,8 +7,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { HttpClientModule } from '@angular/common/http';
 
-import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { MatTableModule } from '@angular/material/table';
+import { MaterialModule } from './shared/modules/material.module';
 
 @NgModule({
   declarations: [
@@ -19,8 +18,7 @@ import { MatTableModule } from '@angular/material/table';
     AppRoutingModule,
     BrowserAnimationsModule,
     HttpClientModule,
-    MatProgressSpinnerModule,
-    MatTableModule,
+    MaterialModule
   ],
   providers: [],
   bootstrap: [AppComponent]

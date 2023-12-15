@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { ApiService } from './shared/services/api.service';
 
 @Component({
   selector: 'app-root',
@@ -11,42 +12,31 @@ export class AppComponent implements OnInit {
   loader: boolean = false;
   data = [];
   staticData: any = [];
-  displayedColumns: string[] = ['SSID', 'NAME', 'Cir_Name', 'Div_Name', 'Feeder_Name', 'date', 'IR', 'IY', 'IB', 'VR', 'VY', 'VB', 'KWR', 'KWY', 'KWB'];
+  displayedColumns: string[] = [
+    'SSID', 'NAME', 'Cir_Name', 'Div_Name', 'Feeder_Name', 'date', 'IR', 'IY', 'IB', 'VR', 'VY', 'VB', 'KWR', 'KWY', 'KWB'
+  ];
   dataSource: any = [];
 
   constructor(
-    private http: HttpClient
+    private api: ApiService
   ) { }
 
   ngOnInit(): void {
     this.getData()
-    this.getStaticData()
   }
 
-  async getData() {
+  getData(): void {
+    this.loader = true;
     try {
-      this.loader = true;
-      let url = './assets/json/input_data_json.json'
-      const res: any = await this.http.get(url).toPromise()
-      this.data = res
-      console.log(res)
-      this.getStaticData()
+      this.api.callBothAPIs().then(res => {
+        this.data = res[0]
+        this.staticData = res[1]
+        this.loader = false;
+        this.dataSource = this.mapData()
+      })
     } catch (err) {
       this.loader = false;
-    }
-  }
-
-  async getStaticData() {
-    try {
-      let url = './assets/json/input_static_json.json'
-      const res = await this.http.get(url).toPromise()
-      console.log(res)
-      this.staticData = res
-      this.dataSource = this.mapData()
-      console.log('mappedData', this.dataSource)
-      this.loader = false;
-    } catch (err) {
-      this.loader = false;
+      alert(err)
     }
   }
 
@@ -58,7 +48,7 @@ export class AppComponent implements OnInit {
         NAME: ssData.NAME,
         Cir_Name: ssData.Cir_Name,
         Div_Name: ssData.Div_Name,
-        Feeder_Name: '',
+        Feeder_Name: ssData.FeederInfo.map((feeder: any) => feeder.name).join(', '),
         date: el.message.msgts,
         IR: el.message.data[1][1],
         IY: el.message.data[3][1],
@@ -71,6 +61,28 @@ export class AppComponent implements OnInit {
         KWB: el.message.data[9][1],
       }
     })
+  }
+
+  getHeaderName(id: string) {
+    let data = [
+      { title: 'SSID', value: 'SSID' },
+      { title: 'Name', value: 'NAME' },
+      { title: 'Cir Name', value: 'Cir_Name' },
+      { title: 'Div Name', value: 'Div_Name' },
+      { title: 'Feeder Name', value: 'Feeder_Name' },
+      { title: 'Date', value: 'date' },
+      { title: 'IR', value: 'IR' },
+      { title: 'IY', value: 'IY' },
+      { title: 'IB', value: 'IB' },
+      { title: 'VR', value: 'VR' },
+      { title: 'VY', value: 'VY' },
+      { title: 'VB', value: 'VB' },
+      { title: 'KWR', value: 'KWR' },
+      { title: 'KWY', value: 'KWY' },
+      { title: 'KWB', value: 'KWB' },
+    ];
+    let title: any = data.find(el => el.value == id)
+    return title?.title || '-'
   }
 
 }
