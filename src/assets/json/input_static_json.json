@@ -1,0 +1,82 @@
+[{
+  "SSID": 7,
+  "NAME": "66kV SS-7",
+  "Cir_Name": "GJ",
+  "Div_Name": "ADI",
+  "ISACT": true,
+  "LAT": "23.49213",
+  "LONG": "72.455771",
+  "FeederInfo": [
+    {
+      "LID": 11,
+      "name": "11kV FDR-11",
+      "ISACT": true,
+      "ISPDC": false
+    },
+    {
+      "LID": 21,
+      "name": "11kV FDR-21",
+      "ISACT": true,
+      "ISPDC": false
+    },
+    {
+      "LID": 31,    
+      "name": "11kV FDR-31",
+      "ISACT": true,
+      "ISPDC": false
+    }
+  ]
+},
+{
+  "SSID": 17,
+  "NAME": "66kV SS-17",
+  "Cir_Name": "GJ",
+  "Div_Name": "GND",
+  "ISACT": true,
+  "LAT": "23.49213",
+  "LONG": "72.455771",
+  "FeederInfo": [
+    {
+      "LID": 12,
+      "name": "11kV FDR-12",
+      "ISACT": true,
+      "ISPDC": false
+    },
+    {
+      "LID": 22,
+      "name": "11kV FDR-22",
+      "ISACT": true,
+      "ISPDC": false
+    }
+  ]
+},
+{
+  "SSID": 27,
+  "NAME": "66kV SS-27",
+  "Cir_Name": "GJ",
+  "Div_Name": "KHL",
+  "ISACT": true,
+  "LAT": "23.49213",
+  "LONG": "72.455771",
+  "FeederInfo": [
+    {
+      "LID": 13,
+      "name": "11kV FDR-13",
+      "ISACT": false,
+      "ISPDC": false
+    },
+    {
+      "LID": 23,
+      "name": "11kV FDR-23",
+      "ISACT": true,
+      "ISPDC": false
+    },
+    {
+      "LID": 33,    
+      "name": "11kV FDR-33",
+      "ISACT": true,
+      "ISPDC": false
+    }
+  ]
+}
+]
